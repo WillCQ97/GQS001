@@ -74,4 +74,15 @@ public class PedidoTeste {
 
         Assert.assertEquals(valorDescontoEsperado, pedido.getValorDesconto(), 0.001);
     }
+    
+    @Test
+    public void CT03() {
+        Pedido pedido = new Pedido(new Cliente("Fulano", "123.456.789-09"), 
+                new Produto("Canetão Rosa", 3.6, 50), 5, LocalDate.now());
+        
+        double valorTotalPedido = 3.6 * 5;
+        double valorAPagarEsperado = valorTotalPedido - valorTotalPedido * 0.05;
+        
+        Assert.assertEquals(valorAPagarEsperado, pedido.getValorAPagar(), 0.001);
+    }
 }
