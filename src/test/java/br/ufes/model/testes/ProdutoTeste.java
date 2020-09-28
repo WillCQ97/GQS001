@@ -41,4 +41,13 @@ public class ProdutoTeste {
         Produto produto = new Produto("Canetão rosa", 3.6, 10);
         Assert.assertEquals(produto.getValorUltimaCompra(), produto.getValorUnitario(), 0.001);
     }
+    
+    @Test
+    public void CT03() {
+        double valorInicial = 3.6;
+        Produto produto = new Produto("Canetão rosa", valorInicial, 10);
+        produto.setValorUnitario(3.2);
+        
+        Assert.assertEquals(produto.getValorUltimaCompra(), valorInicial, 0.001);
+    }
 }
