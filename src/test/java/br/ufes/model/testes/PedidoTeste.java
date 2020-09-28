@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufes.model.testes;
 
 import br.ufes.model.Cliente;
@@ -16,10 +11,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-/**
- *
- * @author willcq
- */
 public class PedidoTeste {
 
     public PedidoTeste() {
@@ -78,9 +69,9 @@ public class PedidoTeste {
 
         double valorTotalPedido = canetaAzul.getValorUnitario()
                 * qtdAzul + canetaVermelha.getValorUnitario() * qtdVerm;
-        
+
         double valorDescontoEsperado = valorTotalPedido * 0.05;
-        
+
         Assert.assertEquals(valorDescontoEsperado, pedido.getValorDesconto(), 0.001);
     }
 }
