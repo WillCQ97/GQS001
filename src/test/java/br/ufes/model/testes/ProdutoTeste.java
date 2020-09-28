@@ -35,4 +35,10 @@ public class ProdutoTeste {
         
         Assert.assertEquals(false, produto.estoqueDisponivel(50));
     }
+    
+    @Test
+    public void CT02() {
+        Produto produto = new Produto("Canetão rosa", 3.6, 10);
+        Assert.assertEquals(produto.getValorUltimaCompra(), produto.getValorUnitario(), 0.001);
+    }
 }
