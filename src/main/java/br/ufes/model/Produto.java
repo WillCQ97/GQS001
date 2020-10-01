@@ -9,7 +9,8 @@ public final class Produto {
 
     public Produto(String nome, double valorUnitario, double quantidade) {
         this.nome = nome;
-        setValorUnitario(valorUnitario);
+        this.valorUnitario = valorUnitario;
+        this.valorUltimaCompra = valorUnitario;
         this.quantidade = quantidade;
     }
 
