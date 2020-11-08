@@ -36,14 +36,14 @@ public final class Produto {
 
     public void setNome(String nome) {
         if (nome == null) {
-            throw new RuntimeException("Nome inválido: " + nome);
+            throw new NullPointerException("O nome do produto não pode ser nulo.");
         }
         this.nome = nome;
     }
 
     public void setValorUnitario(double valorUnitario) {
         if (valorUnitario <= 0) {
-            throw new RuntimeException("Valor inválido: " + valorUnitario);
+            throw new IllegalArgumentException("O valor informado deve ser maior do que zero!");
         }
         this.valorUltimaCompra = this.valorUnitario;
         this.valorUnitario = valorUnitario;

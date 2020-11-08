@@ -12,7 +12,7 @@ public final class Pedido {
 
     protected Cliente cliente;
     protected double valor;
-    protected final double desconto = 0.05;
+    protected static final double DESCONTO = 0.05;
     protected double valorDesconto;
     protected double valorAPagar;
     protected final ArrayList<ItemPedido> itens = new ArrayList<>();
@@ -21,8 +21,9 @@ public final class Pedido {
 
     public Pedido(Cliente cliente, Produto produto, double quantidade, LocalDate data) {
         if (cliente == null) {
-            throw new RuntimeException("Informe um cliente válido");
+            throw new NullPointerException("O cliente informado não pode ser nulo!");
         }
+        
         this.cliente = cliente;
         this.data = data;
         this.dataVencimento = data.plusMonths(1);
@@ -31,10 +32,10 @@ public final class Pedido {
 
     public final void addItem(Produto produto, double quantidade) {
         if (quantidade <= 0) {
-            throw new RuntimeException("Informe uma quantidade válida!");
+            throw new IllegalArgumentException("A quantidade informada deve ser maior que 0!");
         }
         if (this.getItemPorNome(produto.getNome()).isPresent()) {
-            throw new RuntimeException("Produto já existe! Remova-o ou altere a quantidade");
+            throw new IllegalArgumentException("Produto já existe! Remova-o ou altere a quantidade.");
         }
         itens.add(new ItemPedido(produto, quantidade));
         calcularValor();
@@ -43,7 +44,7 @@ public final class Pedido {
     protected Optional<ItemPedido> getItemPorNome(String nomeProduto) {
         Optional<ItemPedido> itemEncontrado = Optional.empty();
         for (ItemPedido item : itens) {
-            if (item.getProduto().getNome().toLowerCase().equals(nomeProduto.toLowerCase())) {
+            if (item.getProduto().getNome().equalsIgnoreCase(nomeProduto)) {
                 itemEncontrado = Optional.of(item);
             }
         }
@@ -63,7 +64,7 @@ public final class Pedido {
     }
 
     private void aplicarDesconto() {
-        this.valorDesconto = valor * desconto;
+        this.valorDesconto = valor * DESCONTO;
         this.valorAPagar = valor - valorDesconto;
     }
 
@@ -71,7 +72,7 @@ public final class Pedido {
 
         Optional<ItemPedido> produtoEncontrado = getItemPorNome(nomeProduto);
         if (!produtoEncontrado.isPresent()) {
-            throw new RuntimeException("Item " + nomeProduto + " não encontrado");
+            throw new IllegalArgumentException("Informe um produto que tenha sido adicionado ao pedido!");
         }
 
         itens.remove(produtoEncontrado.get());
@@ -91,7 +92,7 @@ public final class Pedido {
     }
 
     public double getDesconto() {
-        return desconto;
+        return DESCONTO;
     }
 
     public double getValorAPagar() {
@@ -109,19 +110,23 @@ public final class Pedido {
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat("0.00");
-        String retorno = "--------------- Pedido --------------\n";
-        retorno += cliente + "\n";
-        retorno += "Data: " + data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ", ";
-        retorno += "Data de vencimento: " + dataVencimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n";
-        retorno += "Valor sem desconto: R$ " + df.format(getValor()) + "\n";
-        retorno += "Desconto: R$: " + df.format(valorDesconto) + " (" + desconto * 100 + "%)\n";
-        retorno += "Valor a pagar: R$ " + df.format(valorAPagar) + "\n";
-        retorno += "Itens do pedido:\n";
-        for (ItemPedido item : itens) {
-            retorno += "\t- " + item.toString() + "\n";
-        }
 
-        return retorno;
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("--------------- Pedido --------------\n");
+        builder.append(cliente + "\n");
+        builder.append("Data: " + data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ", ");
+        builder.append("Data de vencimento: " + dataVencimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n");
+        builder.append("Valor sem DESCONTO: R$ " + df.format(getValor()) + "\n");
+        builder.append("Desconto: R$: " + df.format(valorDesconto) + " (" + DESCONTO * 100 + "%)\n");
+        builder.append("Valor a pagar: R$ " + df.format(valorAPagar) + "\n");
+        builder.append("Itens do pedido:\n");
+        
+        for (ItemPedido item : itens) {
+            builder.append("\t- " + item.toString() + "\n");
+        }
+        
+        return builder.toString();
     }
 
 }

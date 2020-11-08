@@ -11,9 +11,10 @@ public final class ItemPedido {
 
     public ItemPedido(Produto produto, double quantidadeAdquirida) {
         if (!produto.estoqueDisponivel(quantidadeAdquirida)) {
-            throw new RuntimeException("Estoque indisponível para atender a quantidade solicitada (" + quantidadeAdquirida
-                    + ") para o produto " + produto.getNome()
-                    + ", restam " + produto.getQuantidade() + " em estoque.");
+            String mensagem = "Estoque indisponível para atender a quantidade solicitada (" + quantidadeAdquirida
+                    + ") para o produto " + produto.getNome() + ", restam " + produto.getQuantidade() + " em estoque.";
+
+            throw new IllegalArgumentException(mensagem);
         }
         this.produto = produto;
         this.quantidade = quantidadeAdquirida;
@@ -45,9 +46,7 @@ public final class ItemPedido {
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat("0.00");
-        return produto.getNome()
-                + ", valor Unitario: R$ " + valorUnitario
-                + ", quantidade no pedido:" + quantidade
+        return produto.getNome() + ", valor Unitario: R$ " + valorUnitario + ", quantidade no pedido:" + quantidade
                 + ", valor Total: R$ " + df.format(getValorItem());
     }
 

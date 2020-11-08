@@ -3,24 +3,24 @@ package br.ufes.model;
 public final class Cliente {
 
     private final String nome;
-    private final String CNPJOuCPF;
+    private final String codigoPessoa;
 
     public Cliente(String nome, String codigo) {
         this.nome = nome;
-        this.CNPJOuCPF = codigo;
+        this.codigoPessoa = codigo;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public String getCNPJOuCPF() {
-        return CNPJOuCPF;
+    public String getCodigoPessoa() {
+        return codigoPessoa;
     }
 
     @Override
     public String toString() {
-        return "Cliente: " + nome + ", CNPJ/CPF = " + CNPJOuCPF;
+        return "Cliente: " + nome + ", CNPJ/CPF = " + codigoPessoa;
     }
 
 }
