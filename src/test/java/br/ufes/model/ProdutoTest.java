@@ -1,4 +1,4 @@
-package br.ufes.model.testes;
+package br.ufes.model;
 
 import br.ufes.model.Produto;
 import org.junit.After;
@@ -8,9 +8,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ProdutoTeste {
+public class ProdutoTest {
     
-    public ProdutoTeste() {
+    public ProdutoTest() {
     }
     
     @BeforeClass

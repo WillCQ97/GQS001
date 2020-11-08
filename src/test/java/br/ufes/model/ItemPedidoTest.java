@@ -1,4 +1,4 @@
-package br.ufes.model.testes;
+package br.ufes.model;
 
 import br.ufes.model.ItemPedido;
 import br.ufes.model.Produto;
@@ -9,9 +9,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class ItemPedidoTeste {
+public class ItemPedidoTest {
     
-    public ItemPedidoTeste() {
+    public ItemPedidoTest() {
     }
     
     @BeforeClass

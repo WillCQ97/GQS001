@@ -1,4 +1,4 @@
-package br.ufes.model.testes;
+package br.ufes.model;
 
 import br.ufes.model.Cliente;
 import br.ufes.model.Pedido;
@@ -11,9 +11,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class PedidoTeste {
+public class PedidoTest {
 
-    public PedidoTeste() {
+    public PedidoTest() {
     }
 
     @BeforeClass
