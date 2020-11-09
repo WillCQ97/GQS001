@@ -1,8 +1,5 @@
 package br.ufes.model;
 
-import br.ufes.model.Cliente;
-import br.ufes.model.Pedido;
-import br.ufes.model.Produto;
 import java.time.LocalDate;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -74,15 +71,42 @@ public class PedidoTest {
 
         Assert.assertEquals(valorDescontoEsperado, pedido.getValorDesconto(), 0.001);
     }
-    
+
     @Test
     public void CT03() {
-        Pedido pedido = new Pedido(new Cliente("Fulano", "123.456.789-09"), 
+        Pedido pedido = new Pedido(new Cliente("Fulano", "123.456.789-09"),
                 new Produto("Canetão Rosa", 3.6, 50), 5, LocalDate.now());
-        
+
         double valorTotalPedido = 3.6 * 5;
         double valorAPagarEsperado = valorTotalPedido - valorTotalPedido * 0.05;
-        
+
         Assert.assertEquals(valorAPagarEsperado, pedido.getValorAPagar(), 0.001);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void CT04() {
+        var pedido = new Pedido(null, new Produto("Novo Produto", 3.6, 12), 25, LocalDate.now());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void CT05() {
+        var produto = new Produto("Canetão Rosa", 3.6, 50);
+        var pedido = new Pedido(new Cliente("Fulano", "123.456.789-09"), produto, 5, LocalDate.now());
+
+        pedido.addItem(produto, 100);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void CT06() {
+        var produto = new Produto("Canetão Rosa", 3.6, 50);
+        var pedido = new Pedido(new Cliente("Fulano", "123.456.789-09"), produto, 0, LocalDate.now());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void CT07() {
+        var pedido = new Pedido(new Cliente("Cliente", "000.000.000-00"),
+                new Produto("Produto", 2.63, 20), 1, LocalDate.now());
+        
+        pedido.removerItem("Produto não adicionado");
     }
 }

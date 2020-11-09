@@ -114,16 +114,16 @@ public final class Pedido {
         StringBuilder builder = new StringBuilder();
 
         builder.append("--------------- Pedido --------------\n");
-        builder.append(cliente + "\n");
-        builder.append("Data: " + data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ", ");
-        builder.append("Data de vencimento: " + dataVencimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n");
-        builder.append("Valor sem DESCONTO: R$ " + df.format(getValor()) + "\n");
-        builder.append("Desconto: R$: " + df.format(valorDesconto) + " (" + DESCONTO * 100 + "%)\n");
-        builder.append("Valor a pagar: R$ " + df.format(valorAPagar) + "\n");
+        builder.append(cliente).append("\n");
+        builder.append("Data: ").append(data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))).append(", ");
+        builder.append("Data de vencimento: ").append(dataVencimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))).append("\n");
+        builder.append("Valor sem DESCONTO: R$ ").append(df.format(getValor())).append("\n");
+        builder.append("Desconto: R$: ").append(df.format(valorDesconto)).append(" (").append(DESCONTO * 100).append("%)\n");
+        builder.append("Valor a pagar: R$ ").append(df.format(valorAPagar)).append("\n");
         builder.append("Itens do pedido:\n");
         
         for (ItemPedido item : itens) {
-            builder.append("\t- " + item.toString() + "\n");
+            builder.append("\t- ").append(item.toString()).append("\n");
         }
         
         return builder.toString();

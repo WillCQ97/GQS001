@@ -1,6 +1,5 @@
 package br.ufes.model;
 
-import br.ufes.model.Produto;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -49,5 +48,19 @@ public class ProdutoTest {
         produto.setValorUnitario(3.2);
         
         Assert.assertEquals(produto.getValorUltimaCompra(), valorInicial, 0.001);
+    }
+    
+    @Test(expected = NullPointerException.class)
+    public void CT04(){
+        var produto = new Produto("Nome do Produto", 3.69, 10);
+        
+        produto.setNome(null);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void CT05(){
+        var produto = new Produto("Nome do Produto", 3.69, 20);
+        
+        produto.setValorUnitario(-2.69);
     }
 }

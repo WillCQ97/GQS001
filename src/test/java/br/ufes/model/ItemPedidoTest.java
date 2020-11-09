@@ -1,7 +1,5 @@
 package br.ufes.model;
 
-import br.ufes.model.ItemPedido;
-import br.ufes.model.Produto;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -35,5 +33,10 @@ public class ItemPedidoTest {
         ItemPedido itemPedido = new ItemPedido(new Produto("Canetão rosa", 3.6, 10), 5);
         
         assertEquals(5*3.6, itemPedido.getValorItem(), 0.001);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void CT02(){
+        var itemPedido = new ItemPedido(new Produto("Nome do Produto", 3.6, 10), 45);
     }
 }

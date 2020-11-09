@@ -42,7 +42,7 @@ public final class ItemPedido {
     public Produto getProduto() {
         return produto;
     }
-
+    
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat("0.00");
